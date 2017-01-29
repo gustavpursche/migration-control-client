@@ -1,11 +1,14 @@
 .slider {
   display: block;
+  margin-bottom: 1rem !important;
+  position: relative;
+  user-select: none;
   vertical-align: middle;
   width: 100%;
 
   &-track {
     background-color: $text-color;
-    height: .5rem;
+    height: .4rem;
     left: 0;
     position: absolute;
     top: 0;
@@ -15,11 +18,11 @@
   &-handle {
     background-color: $color-attention;
     border-radius: 50%;
-    height: 2rem;
+    height: 1.5rem;
     margin-left: -1rem;
     position: absolute;
-    top: -.8rem;
-    width: 2rem;
+    top: -.6rem;
+    width: 1.5rem;
   }
 
   &-tick-label-container {
@@ -28,7 +31,7 @@
     font-weight: $weight-sans-serif-bold;
     letter-spacing: .02rem;
     text-transform: uppercase;
-    margin-top: 1.5rem;
+    padding-top: 1rem;
     text-shadow: 0 0 $color-app-dark;
     white-space: nowrap;
   }
