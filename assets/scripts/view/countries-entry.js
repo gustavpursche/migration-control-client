@@ -201,7 +201,7 @@ export default CountryBaseView.extend({
         </div>
       <% } %>
 
-      <% if (this.model.attributes.treaties) { %>
+      <% if (this.model.attributes.treaties && this.model.attributes.treaties.length > 0) { %>
         <h2 class="countries__block-title">
           <%= i18n('Treaties') %>
         </h2>

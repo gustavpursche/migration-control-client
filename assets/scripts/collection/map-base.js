@@ -74,28 +74,19 @@ export default Backbone.Collection.extend({
   },
 
   getStartYear(type) {
-    const years = [];
-
-    _.forEach(this.models, model => {
-      const data = model.get('data');
-      _.forEach(data[type], item => {
-        years.push(parseInt(_.keys(item)[0], 10));
-      })
-    });
-
-    return _.min(years);
+    return this._getYearByLimiter('min', type);
   },
 
   getEndYear(type) {
-    const years = [];
+    return this._getYearByLimiter('max', type);
+  },
 
-    _.forEach(this.models, model => {
+  _getYearByLimiter(limiter, type) {
+    const years = this.models.map(model => {
       const data = model.get('data');
-      _.forEach(data[type], item => {
-        years.push(parseInt(_.keys(item)[0], 10));
-      })
+      return _.map(data[type], item => parseInt(_.keys(item)[0], 10));
     });
 
-    return _.max(years);
-  },
+    return _[limiter](_.flatten(years));
+  }
 });

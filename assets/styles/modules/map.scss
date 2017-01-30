@@ -29,13 +29,12 @@
   }
 
   &__layer-control {
+    display: block;
+    position: absolute;
+    left: 0;
+    line-height: 1;
+    top: 0;
+    width: 100%;
     z-index: 1000;
-
-    @include small {
-      bottom: 1.5rem;
-      display: block;
-      position: absolute;
-      right: .5rem;
-    }
   }
 }

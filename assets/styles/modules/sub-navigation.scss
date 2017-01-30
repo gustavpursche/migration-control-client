@@ -7,12 +7,15 @@
     background-color: $color-app-medium-dark;
     border-top: 1px solid $border-color;
     display: none;
-    left: 0;
     padding: 1rem;
-    position: absolute;
-    top: 100%;
     width: 100%;
     z-index: 10;
+
+    @include small {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
 
     &--open {
       display: flex;
@@ -51,12 +54,12 @@
     cursor: pointer;
     display: block;
     font-family: $font-family-sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: $weight-sans-serif-medium;
     letter-spacing: .02rem;
     margin-bottom: 0;
     margin-top: 0;
-    padding: .8rem .5rem;
+    padding: .6rem .5rem;
     text-align: center;
     text-transform: uppercase;
     width: 100%;
@@ -83,10 +86,10 @@
     color: currentColor;
     display: block;
     font-family: $font-family-sans-serif;
-    font-size: 1rem;
+    font-size: .85rem;
     font-weight: $weight-sans-serif-medium;
     letter-spacing: .02rem;
-    padding: .1rem 0;
+    padding: .05rem 0;
     text-decoration: none;
     text-transform: uppercase;
 
@@ -105,7 +108,12 @@
   }
 
   &__toggle-icon {
+    color: $color-attention;
     margin-left: .5rem;
     margin-top: -.4rem;
+
+    @include small {
+      display: none;
+    }
   }
 }

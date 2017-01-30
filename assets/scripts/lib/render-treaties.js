@@ -32,24 +32,26 @@ const COUNTRY_TREATIES = _.template(`
 const LIST_TREATIES = _.template(`
   <ul class="treaties">
     <% _.forEach(treaties, function(country, index) { %>
-      <li class="treaties__country-item">
-        <button data-module="treaties-toggle"
-                class="treaties__country">
-          <%= country.country %>
+      <% if (country.treaties && country.treaties.length > 0) { %>
+        <li class="treaties__country-item">
+          <button data-module="treaties-toggle"
+                  class="treaties__country">
+            <%= country.country %>
+
+            <% if (index === 0) { %>
+              <%= icon('chevron-up', 'treaties__country-toggle-icon') %>
+            <% } else { %>
+              <%= icon('chevron-down', 'treaties__country-toggle-icon') %>
+            <% } %>
+          </button>
 
           <% if (index === 0) { %>
-            <%= icon('chevron-up', 'treaties__country-toggle-icon') %>
+            <%= renderCountryTreaties(country.treaties, true) %>
           <% } else { %>
-            <%= icon('chevron-down', 'treaties__country-toggle-icon') %>
+            <%= renderCountryTreaties(country.treaties) %>
           <% } %>
-        </button>
-
-        <% if (index === 0) { %>
-          <%= renderCountryTreaties(country.treaties, true) %>
-        <% } else { %>
-          <%= renderCountryTreaties(country.treaties) %>
-        <% } %>
-      </li>
+        </li>
+      <% } %>
     <% }) %>
   </ul>
 `);

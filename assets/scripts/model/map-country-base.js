@@ -33,11 +33,20 @@ export default Backbone.Model.extend({
     const data = this.get('data');
     const scoped = data[type] || undefined;
 
-    if (scoped === undefined) {
+    if (scoped === undefined || scoped.length === 0) {
       return;
     }
 
-    const result = scoped.find(item => Object.keys(item)[0] == year)
+    const result = scoped.find(item => {
+      if (item) {
+        return Object.keys(item)[0] == year;
+      }
+    });
+
+    if (result === undefined) {
+      return;
+    }
+
     return Object.values(result)[0];
   },
 

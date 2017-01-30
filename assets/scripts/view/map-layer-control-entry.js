@@ -12,55 +12,53 @@ export default Backbone.View.extend({
   initialize(options) {
     this.options = options;
     this.model = new MapControlItem(options);
-    this.listenTo(this.model, 'change:active', () => this.render());
+    this.listenTo(this.model, 'change:active', this.render);
+    this.listenTo(this.options.collection, 'sync', () => this.addSlider());
 
-    // initialize the slider
-    this.listenTo(this.options.collection, 'sync', () => {
-      if (this.model.get('key') === 'detentionCenter') {
-        return;
-      }
-
-      const key = this.model.get('key');
-      const min = this.collection.getStartYear(key);
-      const max = this.collection.getEndYear(key);
-
-      this.slider = new SliderView({
-        min: min,
-        max: max,
-        value: max,
-      });
-
-      // set initial year
-      this.collection.setYear(this.slider.model.get('value'));
-
-      // listen for year changes
-      this.listenTo(this.slider.model, 'change:value', (model, value) => {
-        this.collection.setYear(value);
-      });
-
-      this.render();
-    });
-
-    if (this.model.get('active')) {
+    if (this.isActive()) {
       this.addLayer();
     }
 
     return this.render();
   },
 
-  renderScale() {
-    if (!this.collection.models || !this.collection.models.length > 0) {
-      return this;
-    }
+  isDetentionCenter() {
+    return this.model.get('key') === 'detentionCenter';
+  },
 
-    const range = this.collection.models[0].getRange();
-    let ticks = 5;
+  isActive() {
+    return this.model.get('active') === true;
+  },
 
-    if (!range) {
+  addSlider() {
+    if (this.isDetentionCenter()) {
       return;
     }
 
-    return range.ticks(ticks);
+    // cleanup previously created sliders
+    if (this.slider) {
+      this.slider.remove();
+    }
+
+    const key = this.model.get('key');
+    const min = this.collection.getStartYear(key);
+    const max = this.collection.getEndYear(key);
+
+    this.slider = new SliderView({
+      min,
+      max,
+      value: max,
+    });
+
+    // set initial year
+    this.collection.setYear(max);
+
+    // listen for year changes
+    this.listenTo(this.slider.model, 'change:value', (model, value) => {
+      this.collection.setYear(value);
+    });
+
+    return this.render();
   },
 
   render() {
@@ -68,10 +66,12 @@ export default Backbone.View.extend({
       i18n,
       key: this.model.get('key'),
       active: this.model.get('active'),
-      scale: this.renderScale(),
+      index: this.model.get('index'),
     }));
 
-    if (this.model.get('active') && this.model.get('key') !== 'detentionCenter') {
+    this.$el.toggleClass('layer-control__item--active', this.isActive());
+
+    if (this.isActive() && !this.isDetentionCenter()) {
       if (this.slider) {
         const sliderTarget = this.options.map.getContainer().parentNode;
         this.slider.render().$el.appendTo(sliderTarget);
@@ -84,73 +84,29 @@ export default Backbone.View.extend({
   },
 
   addLayer() {
+    this.model.set('active', true);
     return this.collection.load()
-      .then(() => {
-        this.collection.models.forEach(model => {
-          model.addLayer();
-        });
-      });
+      .then(() => this.collection.models.forEach(model => model.addLayer()));
   },
 
   removeLayer() {
-    this.collection.models.forEach(model => {
-      model.removeLayer();
-    });
-
+    this.model.set('active', false);
+    this.collection.models.forEach(model => model.removeLayer());
     return this;
   },
 
   template: _.template(`
-    <label class="layer-control__item-title <% if (active) { %> layer-control__item-title--active <% }%>">
+    <label class="layer-control__item-title">
       <input type="radio"
              name="layer-control"
              value="<%= key %>"
              <% if (active) { %> selected <% }%> />
 
+      <span class="layer-control__item-index">
+        <%= index %>
+      </span>
+
       <%= i18n(this.model.get('key')) %>
     </label>
-
-    <% if (active && scale && _.isArray(scale)) { %>
-      <div class="layer-control__scale">
-        <% if (key === 'singlePayments') { %>
-          <span class="layer-control__scale-label layer-control__scale-label--min">
-            0.5 Mio.
-          </span>
-
-          <% _.each(scale, function(value) { %>
-            <div class="layer-control__scale-item layer-control__scale-item--singlePayments"
-                 style="width: <%= value/2000 %>rem; height: <%= value/2000 %>rem;">
-              <span class="visually-hidden">
-                <%= value %>
-              </span>
-            </div>
-          <% }) %>
-
-          <span class="layer-control__scale-label layer-control__scale-label--max">
-            <%= _.max(scale) %> Mio.
-          </span>
-        <% } %>
-
-        <% if (key === 'migrationIntensity') { %>
-          <span class="layer-control__scale-label layer-control__scale-label--min">
-            <%= _.min(scale) %>
-          </span>
-
-          <% _.each(scale, function(value) { %>
-            <div class="layer-control__scale-item layer-control__scale-item--migrationIntensity"
-                 style="opacity: <%= value/_.max(scale) %>">
-              <span class="visually-hidden">
-                <%= value %>
-              </span>
-            </div>
-          <% }) %>
-
-          <span class="layer-control__scale-label layer-control__scale-label--max">
-            <%= _.max(scale) %>
-          </span>
-
-        <% } %>
-      </div>
-    <% } %>
   `),
 });

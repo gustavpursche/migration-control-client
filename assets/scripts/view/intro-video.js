@@ -14,7 +14,7 @@ export default Backbone.View.extend({
   },
 
   events: {
-    'click .intro-video__skip': 'destroy',
+    'click [data-skip]': 'destroy',
   },
 
   destroy(event) {
@@ -63,7 +63,8 @@ export default Backbone.View.extend({
 
   template: _.template(`
     <video class="video-js"></video>
-    <button class="intro-video__skip">
+    <button class="intro-video__skip"
+            data-skip>
       <%= i18n('Skip Video') %>
     </button>
   `),
