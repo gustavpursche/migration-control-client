@@ -37,4 +37,10 @@
     width: 100%;
     z-index: 1000;
   }
+
+  &__attribution {
+    bottom: 16rem !important;
+    transform: rotate(-90deg) translateY(-100%);
+    transform-origin: 100% 0;
+  }
 }

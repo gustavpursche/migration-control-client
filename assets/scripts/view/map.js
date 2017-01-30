@@ -50,6 +50,10 @@ export default Backbone.View.extend({
     .addAttribution(`<a href="/de/pages/quellen" data-module="page">${i18n('sources')}</a>`)
     .addTo(map);
 
+    $(attribution.getContainer())
+      .parent()
+      .addClass('map__attribution');
+
     map
     .setView(view)
     .setZoom(zoom);
