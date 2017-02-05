@@ -1,5 +1,11 @@
 .map {
+  overflow: hidden;
   position: relative;
+  transition: height 300ms ease;
+
+  &--hidden {
+    height: 0;
+  }
 
   &__container.leaflet-container {
     background-color: lighten($color-app, 5%);

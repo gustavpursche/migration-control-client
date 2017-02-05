@@ -4,5 +4,6 @@ export default Backbone.Model.extend({
     language: 'de',
     slug: '',
     entry: '',
+    'map-shown': false,
   },
 });

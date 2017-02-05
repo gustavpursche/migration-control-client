@@ -48,6 +48,7 @@ export default Backbone.View.extend({
     };
 
     this.listenTo(this.model, 'change:language', () => this.render('complete'));
+
     this.listenTo(this.model, 'change:slug change:entry', () => {
       let type = 'content';
 
@@ -56,6 +57,11 @@ export default Backbone.View.extend({
       }
 
       this.render(type);
+    });
+
+    // handle global map-hidden/ map-visible state
+    this.listenTo(this.model, 'change:slug', (model, slug) => {
+      return this.model.set('map-shown', slug === 'index');
     });
 
     this.loadWebfonts();

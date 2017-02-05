@@ -12,6 +12,11 @@ export default Backbone.View.extend({
     this.options = options;
     this.model = new MapModel();
 
+    // handle global map-hidden/ map-visible state
+    this.listenTo(this.options.application, 'change:map-shown', (model, value) => {
+      return value === true ? this.show() : this.hide();
+    });
+
     return this;
   },
 
@@ -77,6 +82,16 @@ export default Backbone.View.extend({
     this.layerControl.$el.appendTo(this.$el);
 
     return this;
+  },
+
+  show() {
+    this.options.application.set('map-shown', true);
+    this.$el.removeClass('map--hidden');
+  },
+
+  hide() {
+    this.options.application.set('map-shown', false);
+    this.$el.addClass('map--hidden');
   },
 
   template: _.template(`

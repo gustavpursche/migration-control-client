@@ -261,4 +261,8 @@ export default {
   'Dollar per capita': {
     de: 'Dollar/ Kopf',
   },
+
+  'Map': {
+    de: 'Karte',
+  },
 };
