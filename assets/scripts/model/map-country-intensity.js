@@ -45,17 +45,20 @@ export default MapContryBase.extend({
     const range = this.getRange();
     const value = this._getDataValueForYear(type, year);
 
+    if (!range) {
+      return undefined;
+    }
+
     return range(value);
   },
 
   /* set intensity for a single year */
   setLayerYear(year) {
     const layer = this.get('layer');
-    const fillOpacity = this.getScale(year);
-    const opacity = 1;
+    let fillOpacity = this.getScale(year) || 0;
 
     if (layer) {
-      layer.setStyle({fillOpacity, opacity})
+      layer.setStyle({fillOpacity})
     }
 
     return this;

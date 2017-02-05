@@ -48,14 +48,17 @@ export default Backbone.Collection.extend({
     }
 
     let values = this.models.map(country => {
-      const data = country.get('data')[type] || {};
+      const data = country.getData(type);
       return _.map(data, item => _.values(item)[0]);
     });
 
     values = _.flatten(values);
 
+    const min = _.min(values);
+    const max = _.max(values);
+
     // cache results
-    return this._cache[`data-${type}`] = [_.min(values), _.max(values)];
+    return this._cache[`data-${type}`] = [min, max];
   },
 
   getStartYear(type) {

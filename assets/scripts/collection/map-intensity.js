@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import BaseCollection from 'collection/map-base';
 import Country from 'model/map-country-intensity';
 
@@ -11,10 +10,13 @@ export default BaseCollection.extend({
     const dataType = 'migrationIntensity';
 
     this.on('sync', () => {
-      _.forEach(this.models, model => {
+      this.models.forEach(model => {
         const layerScale = this._getDataRange(dataType);
         const year = this.getEndYear(dataType);
-        model.set({layerScale, year});
+
+        if (model.getData(dataType).length > 0) {
+          model.set({layerScale, year});
+        }
       });
     });
 
