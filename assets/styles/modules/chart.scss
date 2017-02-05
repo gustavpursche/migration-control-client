@@ -26,6 +26,12 @@
   }
 
   &--hdi {
+    height: 15rem;
+
+    @include small {
+      height: 20rem;
+    }
+
     .c3-chart-lines {
       // Intensity
       > .c3-chart-line:first-child {
@@ -55,6 +61,14 @@
         .c3-areas > path {
           opacity: .7;
         }
+      }
+    }
+
+    .c3-axis > .tick:nth-child(odd) {
+      display: none;
+
+      @include small {
+        display: block;
       }
     }
   }
