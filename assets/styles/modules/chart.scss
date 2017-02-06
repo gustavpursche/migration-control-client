@@ -64,6 +64,19 @@
       }
     }
 
+    .c3-axis > .tick {
+      font-size: .4rem;
+      white-space: nowrap;
+
+      @include small {
+        font-size: .5rem;
+      }
+
+      @include medium {
+        font-size: .6rem;
+      }
+    }
+
     .c3-axis > .tick:nth-child(odd) {
       display: none;
 
@@ -90,12 +103,16 @@
   .c3-legend-item,
   &__label {
     font-family: $font-family-sans-serif;
-    font-size: .65rem;
+    font-size: .55rem;
     font-weight: $weight-sans-serif-bold;
     letter-spacing: .02rem;
     text-align: center;
     text-transform: uppercase;
     word-wrap: break-word;
+
+    @include small {
+      font-size: .65rem;
+    }
   }
 
   .c3-tooltip {

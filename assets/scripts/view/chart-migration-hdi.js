@@ -50,6 +50,9 @@ export default Chart.extend({
           }
         }
       },
+      legend: {
+        show: false,
+      },
     };
 
     data.forEach(country => {
@@ -69,7 +72,30 @@ export default Chart.extend({
     c3Options.data.types[c3Options.data.columns[0][0]] = 'area-spline';
     c3Options.data.types[c3Options.data.columns[1][0]] = 'area-spline';
 
-    return this.buildChart(c3Options);
+    this.chart = this.buildChart(c3Options);
+
+    /* custom label */
+    const selection = d3.select(this.$el.eq(0).parent().get(0))
+      .selectAll('span')
+      .data([
+        i18n('Migrationintensity'),
+        i18n('Payments from EU countries')
+      ])
+        .enter();
+
+    const label = selection.append('span').attr('class', 'chart__label');
+
+    label
+      .append('span')
+        .attr('class', 'chart__label-color')
+        .attr('style', id => `background-color: ${this.chart.color(id)}`);
+
+    label
+      .append('span')
+        .attr('class', 'chart__label-text')
+        .html(id => id);
+
+    return this.chart;
   },
 
 });
