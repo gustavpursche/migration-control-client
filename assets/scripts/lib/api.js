@@ -2,6 +2,10 @@ import $ from 'jquery';
 import _ from 'underscore';
 import limax from 'limax';
 
+const emptyResponse = () => {
+  return $.Deferred().resolve();
+}
+
 export default class API {
   constructor() {
     this.pending = {};
@@ -41,18 +45,34 @@ export default class API {
   }
 
   findCountryById(id) {
+    if (id === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch(`country/${id}`);
   }
 
   findBackgroundById(id) {
+    if (id === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch(`background/${id}`);
   }
 
   findPageById(id) {
+    if (id === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch(`imprint/${id}`);
   }
 
   findCountryBySlug(slug) {
+    if (slug === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch('countriesoverview')
       .then(data => {
         let id;
@@ -70,6 +90,10 @@ export default class API {
   }
 
   findBackgroundBySlug(slug) {
+    if (slug === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch('backgroundoverview')
       .then(data => {
         let id;
@@ -87,6 +111,10 @@ export default class API {
   }
 
   findPageBySlug(slug) {
+    if (slug === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch('imprint')
       .then(data => {
         let res;
@@ -102,6 +130,10 @@ export default class API {
   }
 
   findCountryByName(name) {
+    if (name === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch('countriesoverview')
       .then(data => {
         let id;
@@ -119,6 +151,10 @@ export default class API {
   }
 
   findBackgroundByName(name) {
+    if (name === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch('backgroundoverview')
       .then(data => {
         let id;
@@ -136,6 +172,10 @@ export default class API {
   }
 
   findPageByName(name) {
+    if (name === undefined) {
+      return emptyResponse();
+    }
+
     return this.fetch('imprint')
       .then(data => {
         let res;

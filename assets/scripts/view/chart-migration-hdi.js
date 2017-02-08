@@ -9,6 +9,10 @@ export default Chart.extend({
   type: 'hdi',
 
   renderChart(data) {
+    if (!data || data.length === 0) {
+      return;
+    }
+
     const c3Options = {
       axis: {
         x: {

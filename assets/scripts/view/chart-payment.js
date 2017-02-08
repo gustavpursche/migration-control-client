@@ -12,6 +12,10 @@ export default Chart.extend({
   type: 'payment',
 
   renderChart(data) {
+    if (!data || data.length === 0) {
+      return;
+    }
+
     const c3Options = {
       axis: {
         x: {

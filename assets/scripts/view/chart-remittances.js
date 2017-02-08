@@ -12,6 +12,10 @@ export default Chart.extend({
   type: 'remittances',
 
   renderChart(data) {
+    if (!data || data.length === 0) {
+      return;
+    }
+
     const c3Options = {
       bindto: this.$el.get(0),
       data: {

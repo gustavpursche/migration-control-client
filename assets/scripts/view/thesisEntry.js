@@ -72,7 +72,8 @@ export default Backbone.View.extend({
     }
 
     if (views.length > 0) {
-      views.forEach(view => view.$el.appendTo(this.$el.find('.thesis__chart')));
+      const $target = this.$el.find('.thesis__chart');
+      views.forEach(view => view.$el.appendTo($target));
 
       if (this.model.get('diagramType') === 'remittances') {
         this.addRemittancesLabels();

@@ -9,7 +9,11 @@ export default Backbone.View.extend({
 
     this.options.countries.forEach(name => {
       const promise = this.options.api.findCountryByName(name)
-        .then(data => promiseData.push(data));
+        .then(data => {
+          if (data !== undefined) {
+            promiseData.push(data);
+          }
+        });
 
       promises.push(promise);
     });
