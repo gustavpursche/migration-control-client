@@ -28,7 +28,9 @@ export default Backbone.View.extend({
     this._globalCtx = {
       application: this.model,
       _router: options._router,
-      api: new API(),
+      api: new API({
+        application: this.model,
+      }),
     };
 
     this.views = {

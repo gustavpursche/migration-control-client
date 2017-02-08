@@ -3,15 +3,26 @@ import _ from 'underscore';
 import limax from 'limax';
 
 export default class API {
-  constructor() {
+  constructor(options) {
+    this.options = options;
     this.pending = {};
     this.store = {};
+
+    const language = this.options.application.get('language');
+
     this.api = {
       host: '{{API_HOST}}',
-      language: 'de',
+      language,
       namespace: 'migrationcontrol',
       version: 'v1',
     };
+
+    // update required language
+    this.options.application.on('change:language', (model, value) => {
+      this.api.language = value;
+    });
+
+    return this;
   }
 
   _buildAPIUrl(endpoint) {
