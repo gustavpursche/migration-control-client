@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import d3 from 'd3';
+import {fetchGeoData} from 'lib/fetch-geojson';
 import i18n from 'lib/i18n';
 import L from 'leaflet';
 import limax from 'limax';
@@ -18,14 +19,14 @@ export default MapContryBase.extend({
   },
 
   addLayer() {
-    const fetchGeoData = () => {
-      const name = this.get('name');
-      const slug = i18n(limax(name), 'de');
-      return $.getJSON(`/data/geo/${slug}.geojson`);
-    };
+    const countryName = this.get('name');
 
-    return fetchGeoData()
+    return fetchGeoData(countryName)
       .then(data => {
+        if (!data) {
+          return;
+        }
+
         const geoJSON = L.geoJson(data);
         const center = geoJSON.getBounds().getCenter();
         const style = this.get('layerStyle');

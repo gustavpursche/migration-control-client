@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import d3 from 'd3';
+import {fetchGeoData} from 'lib/fetch-geojson';
 import i18n from 'lib/i18n';
 import limax from 'limax';
 import MapContryBase from 'model/map-country-base';
@@ -20,14 +21,14 @@ export default MapContryBase.extend({
 
   /* draw intensity layer */
   addLayer() {
-    const fetchGeoData = () => {
-      const name = this.get('name');
-      const slug = i18n(limax(name), 'de');
-      return $.getJSON(`/data/geo/${slug}.geojson`);
-    };
+    const countryName = this.get('name');
 
-    return fetchGeoData()
+    return fetchGeoData(countryName)
       .then(data => {
+        if (!data) {
+          return;
+        }
+
         const style = this.get('layerStyle');
         const className = 'leaflet-country-overlay';
         const opts = Object.assign(style, {className});
