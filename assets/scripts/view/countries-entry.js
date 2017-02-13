@@ -38,14 +38,14 @@ export default CountryBaseView.extend({
 
   template: _.template(`
     <h2 class="visually-hidden">
-      <%= i18n('Introduction') %>
+      <%= i18n.load('Introduction') %>
     </h2>
 
     <% if (this.model.attributes.finding) { %>
       <article class="article article--finding">
         <div class="app__content">
           <h2 class="countries__block-title countries__block-title--no-spacing">
-            <%= i18n('Finding') %>
+            <%= i18n.load('Finding') %>
           </h2>
 
           <div class="countries__block">
@@ -65,7 +65,7 @@ export default CountryBaseView.extend({
 
                     <% if (image.credit) { %>
                       <span class="article__image-credit">
-                        <%= i18n('Photo') %>: <%= image.credit %>
+                        <%= i18n.load('Photo') %>: <%= image.credit %>
                       </span>
                     <% } %>
                   </figcaption>
@@ -83,7 +83,7 @@ export default CountryBaseView.extend({
               <% if (this.model.getFinding('authors')) { %>
                 <small class="features__item-authors-container">
                   <strong>
-                    <%= i18n('Authors') %>:
+                    <%= i18n.load('Authors') %>:
                   </strong>
                   <%= renderAuthors(this.model.getFinding('authors')) %>
                 </small>
@@ -93,8 +93,8 @@ export default CountryBaseView.extend({
             <button type="button"
                     data-module="read-more"
                     class="read-more"
-                    data-toggle="<%= i18n('Show less') %>">
-              <%= i18n('Read More') %>
+                    data-toggle="<%= i18n.load('Show less') %>">
+              <%= i18n.load('Read More') %>
             </button>
 
           </div>
@@ -106,7 +106,7 @@ export default CountryBaseView.extend({
       <% if (this.model.getFeatures()) { %>
         <div class="countries__block">
           <h2 class="countries__block-title">
-            <%= i18n('Features') %>
+            <%= i18n.load('Features') %>
           </h2>
 
           <ul class="features">
@@ -131,7 +131,7 @@ export default CountryBaseView.extend({
 
                       <% if (image.credit) { %>
                         <span class="features__item-credit">
-                          <%= i18n('Photo') %>: <%= image.credit %>
+                          <%= i18n.load('Photo') %>: <%= image.credit %>
                         </span>
                       <% } %>
                     </figcaption>
@@ -148,7 +148,7 @@ export default CountryBaseView.extend({
                   <% if (feature.authors) { %>
                     <small class="features__item-authors-container">
                       <strong>
-                        <%= i18n('Authors') %>:
+                        <%= i18n.load('Authors') %>:
                       </strong>
                       <%= renderAuthors(feature.authors) %>
                     </small>
@@ -158,8 +158,8 @@ export default CountryBaseView.extend({
                 <button type="button"
                         data-module="read-more"
                         class="read-more"
-                        data-toggle="<%= i18n('Show less') %>">
-                  <%= i18n('Read More') %>
+                        data-toggle="<%= i18n.load('Show less') %>">
+                  <%= i18n.load('Read More') %>
                 </button>
               </li>
             <% }); %>
@@ -170,19 +170,19 @@ export default CountryBaseView.extend({
       <% if (this.model.attributes.factSheet) { %>
         <div class="countries__block">
           <h2 class="countries__block-title">
-            <%= i18n('Information') %>
+            <%= i18n.load('Information') %>
           </h2>
 
           <dl class="facts">
             <% _.mapObject(this.model.attributes.factSheet, function(item, index) { %>
               <dt class="facts__term">
-                <%= i18n(index) %>
+                <%= i18n.load(index) %>
               </dt>
               <dd class="facts__value">
                 <% switch (index) {
                   case 'frontexCooperation':
                     if (item.state) {
-                      print(i18n(item.state));
+                      print(i18n.load(item.state));
                     }
 
                     if (item.description) {
@@ -215,7 +215,7 @@ export default CountryBaseView.extend({
 
                   case 'departureLegality':
                     if (item.isIllegal === true) {
-                      print(i18n('yes'));
+                      print(i18n.load('yes'));
 
                       if (item.description) {
                         print(', ' + item.description);
@@ -240,7 +240,7 @@ export default CountryBaseView.extend({
 
       <% if (this.model.attributes.treaties && this.model.attributes.treaties.length > 0) { %>
         <h2 class="countries__block-title">
-          <%= i18n('Treaties') %>
+          <%= i18n.load('Treaties') %>
         </h2>
 
         <%= renderCountryTreaties(this.model.attributes.treaties, true) %>

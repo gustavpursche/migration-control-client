@@ -11,7 +11,14 @@ export default class I18n {
       console.log('translation', this.language, str, translations[str][this.language] || str);
     }
 
-    return translations[str][this.language] || str;
+    const entity = translations[str];
+
+    if (!entity) {
+      console.log('missing:', str);
+      return str;
+    }
+
+    return entity[this.language] || str;
   }
 
   loadFrom(str, language)  {

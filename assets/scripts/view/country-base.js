@@ -1,4 +1,3 @@
-import i18n from 'lib/i18n';
 import {renderCountryTreaties} from 'lib/render-treaties';
 import {renderAuthors} from 'lib/render-authors';
 
@@ -7,11 +6,16 @@ export default Backbone.View.extend({
 
   subnav: 'countries',
 
+  initialize(options) {
+    this.options = options;
+    return this;
+  },
+
   render() {
     if (this.template) {
       this.$el.html(this.template({
         this,
-        i18n,
+        i18n: this.options.i18n,
         renderCountryTreaties,
         renderAuthors,
       }));

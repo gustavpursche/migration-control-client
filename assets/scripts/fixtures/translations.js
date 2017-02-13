@@ -150,66 +150,6 @@ export default {
     de: 'Einleitung',
   },
 
-  egypt: {
-    de: 'aegypten',
-  },
-
-  tunisia: {
-    de: 'tunesien',
-  },
-
-  chad: {
-    de: 'tschad',
-  },
-
-  ethiopia: {
-    de: 'aethiopien',
-  },
-
-  morocco: {
-    de: 'marokko',
-  },
-
-  'south-sudan': {
-    de: 'suedsudan',
-  },
-
-  kenya: {
-    de: 'kenia',
-  },
-
-  mauritania: {
-    de: 'mauretanien',
-  },
-
-  libya: {
-    de: 'libyen',
-  },
-
-  cameroon: {
-    de: 'kamerun',
-  },
-
-  algeria: {
-    de: 'algerien',
-  },
-
-  turkey: {
-    de: 'tuerkei',
-  },
-
-  djibouti: {
-    de: 'dschibuti',
-  },
-
-  'cote-divoire': {
-    de: 'elfenbeinkueste',
-  },
-
-  capeverde: {
-    de: 'kap-verde',
-  },
-
   'Skip Video': {
     de: 'Video überspringen',
   },
@@ -264,5 +204,13 @@ export default {
 
   'Show map': {
     de: 'Karte<br/>öffnen',
+  },
+
+  Finding: {
+    de: 'Länderinfo',
+  },
+
+  Features: {
+    de: 'Features',
   },
 };
