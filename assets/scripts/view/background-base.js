@@ -7,11 +7,16 @@ export default Backbone.View.extend({
 
   subnav: 'background',
 
+  initialize(options) {
+    this.options = options;
+    return this;
+  },
+
   render() {
     if (this.template) {
       this.$el.html(this.template({
-        this,
-        i18n: this.options.i18n.load,
+        model: this.model,
+        i18n: this.options.i18n,
         renderTreatyList,
         renderAuthors,
       }));

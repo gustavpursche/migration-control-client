@@ -41,38 +41,38 @@ export default BaseView.extend({
   template: _.template(`
     <div class="app__content">
       <div class="article">
-        <% if (this.model.get('headline')) { %>
+        <% if (model.get('headline')) { %>
           <h1 class="article__title">
-            <%= this.model.get('headline') %>
+            <%= model.get('headline') %>
           </h1>
         <% } %>
 
-        <% if (this.model.get('lead')) { %>
+        <% if (model.get('lead')) { %>
           <p class="article__lead">
-            <%= this.model.get('lead') %>
+            <%= model.get('lead') %>
           </p>
         <% } %>
 
-        <% if (this.model.get('corpus')) { %>
+        <% if (model.get('corpus')) { %>
           <div class="article__corpus article__corpus--open">
-            <%= this.model.get('corpus') %>
+            <%= model.get('corpus') %>
 
-            <% if (this.model.get('authors')) { %>
+            <% if (model.get('authors')) { %>
               <small class="article__authors-container">
                 <strong>
-                  <%= i18n('Authors') %>:
+                  <%= i18n.load('Authors') %>:
                 </strong>
-                <%= renderAuthors(this.model.get('authors')) %>
+                <%= renderAuthors(model.get('authors')) %>
               </small>
             <% } %>
           </div>
         <% } %>
 
-        <% if (this.model.get('treaties')) { %>
+        <% if (model.get('treaties')) { %>
           <h2 class="visually-hidden">
-            <%= i18n('Treaties') %>
+            <%= i18n.load('Treaties') %>
           </h2>
-          <%= renderTreatyList(this.model.get('treaties')) %>
+          <%= renderTreatyList(model.get('treaties')) %>
         <% } %>
       </div>
     </div>
@@ -88,6 +88,6 @@ export default BaseView.extend({
         this.render();
       });
 
-    return this;
+    return BaseView.prototype.initialize.call(this, options);
   },
 });
