@@ -2,7 +2,6 @@ import $ from 'jquery';
 import _ from 'underscore';
 import d3 from 'd3';
 import {fetchGeoData} from 'lib/fetch-geojson';
-import i18n from 'lib/i18n';
 import limax from 'limax';
 import MapContryBase from 'model/map-country-base';
 
@@ -21,9 +20,9 @@ export default MapContryBase.extend({
 
   /* draw intensity layer */
   addLayer() {
-    const countryName = this.get('name');
+    const countryCode = this.get('countryCode');
 
-    return fetchGeoData(countryName)
+    return fetchGeoData(countryCode)
       .then(data => {
         if (!data) {
           return;

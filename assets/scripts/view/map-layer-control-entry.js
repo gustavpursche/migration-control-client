@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
-import i18n from 'lib/i18n';
 import MapControlItem from 'model/map-layer-control-entry';
 import SliderView from 'view/slider';
 
@@ -63,8 +62,8 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template({
-      i18n,
-      key: this.model.get('key'),
+      raw_key: this.model.get('key'),
+      key: this.options.i18n.load(this.model.get('key')),
       active: this.model.get('active'),
       index: this.model.get('index'),
     }));
@@ -99,14 +98,14 @@ export default Backbone.View.extend({
     <label class="layer-control__item-title">
       <input type="radio"
              name="layer-control"
-             value="<%= key %>"
+             value="<%= raw_key %>"
              <% if (active) { %> selected <% }%> />
 
       <span class="layer-control__item-index">
         <%= index %>
       </span>
 
-      <%= i18n(this.model.get('key')) %>
+      <%= key %>
     </label>
   `),
 });

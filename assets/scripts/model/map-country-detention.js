@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import d3 from 'd3';
-import i18n from 'lib/i18n';
 import L from 'leaflet';
 import limax from 'limax';
 import MapContryBase from 'model/map-country-base';

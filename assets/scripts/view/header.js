@@ -1,7 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import {icon} from 'lib/icon';
-import i18n from 'lib/i18n';
 import LanguagesCollection from 'collection/language';
 import LanguageView from 'view/language';
 
@@ -28,7 +27,7 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template({
       icon,
-      i18n,
+      i18n: this.options.i18n.load,
       language: this.options.application.get('language'),
     }));
 

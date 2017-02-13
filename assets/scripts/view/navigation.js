@@ -18,7 +18,12 @@ export default Backbone.View.extend({
 
     /* render each entry */
     this.collection.forEach(model => {
-      const view = new NavigationEntry(Object.assign(this.options, {model}));
+      const view = new NavigationEntry({
+        model: model,
+        i18n: this.options.i18n,
+        application: this.options.application,
+        _router: this.options._router,
+      });
       view.render().$el.appendTo(this.$el.find('.navigation__list'));
     });
 

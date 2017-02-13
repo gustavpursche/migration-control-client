@@ -1,7 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import Chart from 'view/chart';
-import i18n from 'lib/i18n';
 
 export default Chart.extend({
   className: 'chart',
@@ -36,8 +35,8 @@ export default Chart.extend({
       data: {
         axes: {},
         columns: [
-          [i18n('Migrationintensity')],
-          [i18n('Payments from EU countries')],
+          [this.options.i18n.load('Migrationintensity')],
+          [this.options.i18n.load('Payments from EU countries')],
         ],
         types: {},
       },
@@ -50,9 +49,9 @@ export default Chart.extend({
       tooltip: {
         format: {
           value: function (value, ratio, id) {
-            if (id === i18n('Payments from EU countries')) {
+            if (id === this.options.i18n.load('Payments from EU countries')) {
               const dollar = (Math.round(value * 100)/100).toFixed(2);
-              const label = i18n('Dollar per capita');
+              const label = this.options.i18n.load('Dollar per capita');
               return  `${dollar} ${label}`;
             }
 
@@ -99,8 +98,8 @@ export default Chart.extend({
     const selection = d3.select(this.$el.eq(0).parent().get(0))
       .selectAll('span')
       .data([
-        i18n('Migrationintensity'),
-        i18n('Payments from EU countries')
+        this.options.i18n.load('Migrationintensity'),
+        this.options.i18n.load('Payments from EU countries')
       ])
         .enter();
 

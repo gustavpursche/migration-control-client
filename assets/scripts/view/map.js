@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import i18n from 'lib/i18n';
 import L from 'leaflet';
 import LayerControl from 'view/map-layer-control';
 import MapModel from 'model/map';
@@ -52,7 +51,7 @@ export default Backbone.View.extend({
     .setPrefix('')
     .addAttribution('<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>')
     .addAttribution('<a href="https://carto.com/attributions">CARTO</a>')
-    .addAttribution(`<a href="/de/pages/quellen" data-module="page">${i18n('sources')}</a>`)
+    .addAttribution(`<a href="/de/pages/quellen" data-module="page">${this.options.i18n.load('sources')}</a>`)
     .addTo(map);
 
     $(attribution.getContainer())
@@ -69,10 +68,7 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.$el.html(this.template({
-      i18n,
-    }));
-
+    this.$el.html(this.template());
     this.map = this.createMap();
 
     this.layerControl = new LayerControl(Object.assign(this.options, {

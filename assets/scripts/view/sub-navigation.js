@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import i18n from 'lib/i18n';
 import {icon, toggle} from 'lib/icon';
 import SubNavigationColumn from 'view/sub-navigation-column';
 

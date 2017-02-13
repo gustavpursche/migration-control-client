@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
-import i18n from 'lib/i18n';
 import videojs from 'video.js';
 import vimeo from 'videojs-youtube';
 
@@ -31,7 +30,7 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template({
-      i18n,
+      skip_label: this.options.i18n.load('Skip Video'),
     }));
 
     const options =  {
@@ -65,7 +64,7 @@ export default Backbone.View.extend({
     <video class="video-js"></video>
     <button class="intro-video__skip"
             data-skip>
-      <%= i18n('Skip Video') %>
+      <%= skip_label %>
     </button>
   `),
 });

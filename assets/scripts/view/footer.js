@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import i18n from 'lib/i18n';
 import {icon} from 'lib/icon';
 import Entry from 'view/footer-entry';
 import FooterCollection from 'collection/footer';
@@ -34,7 +33,7 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template({
-      i18n,
+      i18n: this.options.i18n.load,
       icon,
       language: this.options.application.get('language'),
     }));

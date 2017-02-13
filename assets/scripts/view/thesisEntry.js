@@ -1,7 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import ChartHDIView from 'view/chart-migration-hdi';
-import i18n from 'lib/i18n';
 import RemittancesView from 'view/chart-remittances';
 import ThesisCollection from 'collection/thesis';
 
@@ -15,6 +14,7 @@ export default Backbone.View.extend({
       case 'payments':
         views.push(new ChartHDIView({
           api: this.options.api,
+          i18n: this.options.i18n,
           countries: [
             'sn',
           ],
@@ -48,6 +48,7 @@ export default Backbone.View.extend({
         ].forEach(country => views.push(
           new RemittancesView({
             api: this.options.api,
+            i18n: this.options.i18n,
             countries: [
               country,
             ]
@@ -76,12 +77,12 @@ export default Backbone.View.extend({
   addRemittancesLabels(chart) {
     [
       {
-        label: i18n('Remittances'),
+        label: this.options.i18n.load('Remittances'),
         color: 'rgb(128, 127, 128)',
       },
 
       {
-        label: i18n('International aid'),
+        label: this.options.i18n.load('International aid'),
         color: 'rgb(255, 253, 56)',
       },
     ].forEach(item => {
@@ -104,7 +105,7 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template({
       this,
-      i18n,
+      suffix: this.options.i18n.load('Thesis'),
     }));
 
     if (this.model.has('diagramType')) {
@@ -117,7 +118,7 @@ export default Backbone.View.extend({
   template: _.template(`
     <h2 class="thesis__item-title">
       <span class="thesis__item-count">
-        <%= i18n('Thesis') %> <%= this.model.get('count') %>
+        <%= suffix %> <%= this.model.get('count') %>
         <span class="visually-hidden">:</span>
       </span>
 

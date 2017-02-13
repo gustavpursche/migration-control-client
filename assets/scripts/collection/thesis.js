@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import Base from 'collection/base';
 import ThesisEntry from 'model/thesis';
 
@@ -10,7 +9,7 @@ export default Base.extend({
 
     this.options.api.fetch('theses')
       .then(data => {
-        _.forEach(data, item => this.add(item));
+        data.forEach(item => this.add(item));
         this.trigger('sync');
       });
 

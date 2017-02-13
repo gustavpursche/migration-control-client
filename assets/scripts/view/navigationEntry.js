@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import i18n from 'lib/i18n';
 
 export default Backbone.View.extend({
   tagName: 'li',
@@ -38,9 +37,9 @@ export default Backbone.View.extend({
 
   render() {
     const attrs = {
-      i18n,
       model: this.model,
       url: `/${this.options.application.get('language')}`,
+      label: this.options.i18n.load(this.model.get('label')),
     };
 
     if (this.model.getSlug()) {
@@ -54,7 +53,7 @@ export default Backbone.View.extend({
   template: _.template(`
     <a href="<%= url %>"
        class="navigation__item <% if (this.model.get('active')) { %> navigation__item--active <% } %> ">
-      <%= i18n( this.model.get('label') ) %>
+      <%= label %>
     </a>
   `),
 });

@@ -80,6 +80,7 @@ export default Backbone.View.extend({
 
       const viewAttrs = Object.assign({
         map: this.options.map,
+        i18n: this.options.i18n,
         key,
         active: index === 0,
       }, attrs);

@@ -2,7 +2,6 @@ import _ from 'underscore';
 import $ from 'jquery';
 import d3 from 'd3';
 import Chart from 'view/chart';
-import i18n from 'lib/i18n';
 
 const YEAR = 2014;
 
@@ -20,8 +19,8 @@ export default Chart.extend({
       bindto: this.$el.get(0),
       data: {
         columns: [
-          [i18n('Remittances')],
-          [i18n('International aid')],
+          [this.options.i18n.load('Remittances')],
+          [this.options.i18n.load('International aid')],
         ],
         type : 'pie',
       },
@@ -46,7 +45,7 @@ export default Chart.extend({
         format: {
           value: function (value, ratio, id) {
             const dollar = (Math.round(value * 100)/100).toFixed(2);
-            return `${dollar} i18n('Dollar per capita')`;
+            return `${dollar} this.options.i18n.load('Dollar per capita')`;
           }
         }
       },

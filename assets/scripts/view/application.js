@@ -10,7 +10,7 @@ import Footer from 'view/footer';
 import HeaderView from 'view/header';
 import IntroVideo from 'view/intro-video';
 import MapView from 'view/map';
-import i18n from 'lib/i18n';
+import I18n from 'lib/i18n';
 import NavigationView from 'view/navigation';
 import PagesView from 'view/pages';
 import PagesEntryView from 'view/pages-entry';
@@ -31,6 +31,7 @@ export default Backbone.View.extend({
       api: new API({
         application: this.model,
       }),
+      i18n: new I18n(this.model.get('language')),
     };
 
     this.views = {
@@ -49,7 +50,10 @@ export default Backbone.View.extend({
       pages_entry: PagesEntryView,
     };
 
-    this.listenTo(this.model, 'change:language', () => this.render('complete'));
+    this.listenTo(this.model, 'change:language', (model, value) => {
+      this._globalCtx.i18n.language = value;
+      this.render('complete');
+    });
 
     this.listenTo(this.model, 'change:slug change:entry', () => {
       let type = 'content';
@@ -157,7 +161,7 @@ export default Backbone.View.extend({
   },
 
   render(type = 'complete') {
-    const slug = i18n(this.model.get('slug'), 'en');
+    const slug = this.model.get('slug');
     const entry = this.model.get('entry');
     const viewName = this.getViewName(slug, entry);
     const activeView = this.model.get('activeView');
