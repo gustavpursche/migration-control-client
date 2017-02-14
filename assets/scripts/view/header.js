@@ -32,8 +32,8 @@ export default Backbone.View.extend({
     }));
 
     /* create language switch */
-    //const languageSwitch = new LanguageView(this.options);
-    //languageSwitch.render().$el.appendTo(this.$el);
+    const languageSwitch = new LanguageView(this.options);
+    languageSwitch.render().$el.appendTo(this.$el);
 
     return this;
   },
