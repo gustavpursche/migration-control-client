@@ -14,6 +14,7 @@ import I18n from 'lib/i18n';
 import NavigationView from 'view/navigation';
 import PagesView from 'view/pages';
 import PagesEntryView from 'view/pages-entry';
+import ScrollHelper from 'view/scroll-helper';
 import SubNavigationCollection from 'collection/sub-navigation';
 import SubNavigation from 'view/sub-navigation';
 import ThesisView from 'view/thesis';
@@ -42,6 +43,7 @@ export default Backbone.View.extend({
       _map: new MapView(this._globalCtx),
       _footer: new Footer(this._globalCtx),
       _video: new IntroVideo(this._globalCtx),
+      _scrollHelper: new ScrollHelper(this._globalCtx),
 
       index: ThesisView,
       background: BackgroundView,
@@ -106,7 +108,12 @@ export default Backbone.View.extend({
   },
 
   buildInterface() {
-    ['navigation', 'map', 'header',].forEach(item => {
+    [
+      'navigation',
+      'map',
+      'header',
+      'scrollHelper',
+    ].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
 

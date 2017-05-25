@@ -1,0 +1,29 @@
+.scroll-helper {
+  position: fixed;
+  right: 1rem;
+  user-select: none;
+  z-index: 950;
+
+  &__trigger {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $color-attention;
+      text-decoration: none;
+    }
+  }
+
+  &__icon {}
+
+  &__label {
+    display: block;
+    font-family: $font-family-sans-serif;
+    font-size: .8rem;
+    font-weight: $weight-sans-serif-medium;
+    letter-spacing: .05rem;
+    line-height: 1;
+  }
+}
