@@ -134,11 +134,6 @@ export default {
     en: 'Introduction',
   },
 
-  'Skip Video': {
-    de: 'Video überspringen',
-    en: 'Skip Video',
-  },
-
   yes: {
     de: 'ja',
     en: 'yes',

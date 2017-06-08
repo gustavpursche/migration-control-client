@@ -8,7 +8,6 @@ import CountriesView from 'view/countries';
 import CountriesEntryView from 'view/countries-entry';
 import Footer from 'view/footer';
 import HeaderView from 'view/header';
-import IntroVideo from 'view/intro-video';
 import MapView from 'view/map';
 import I18n from 'lib/i18n';
 import NavigationView from 'view/navigation';
@@ -41,7 +40,6 @@ export default Backbone.View.extend({
       _navigation: new NavigationView(this._globalCtx),
       _map: new MapView(this._globalCtx),
       _footer: new Footer(this._globalCtx),
-      _video: new IntroVideo(this._globalCtx),
 
       index: ThesisView,
       background: BackgroundView,
@@ -118,9 +116,7 @@ export default Backbone.View.extend({
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
 
-    this.views._video.render().$el.prependTo(this.$el);
     this.views._footer.render().$el.appendTo(this.$el);
-
     return this;
   },
 
