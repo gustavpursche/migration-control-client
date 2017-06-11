@@ -13,6 +13,6 @@ export default Backbone.Model.extend({
 
     view: [25.36, 17],
 
-    zoom: 4,
+    zoom: 3,
   },
 });
